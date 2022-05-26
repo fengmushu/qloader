@@ -6,8 +6,8 @@ PKG_VERSION:=1.0.1
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://android.googlesource.com/platform/system/core
-PKG_SOURCE_VERSION:=6fe92d1a3fb17545d82d020a3c995f32e6b71f9d
+PKG_SOURCE_URL:=https://github.com/fengmushu/qloader.git
+PKG_SOURCE_VERSION:=f33b5037fa63f18ec5495e1fa1cf03733cf52e40
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_SOURCE_VERSION)
 PKG_SOURCE:=$(PKG_SOURCE_SUBDIR).tar.xz
 
@@ -38,7 +38,7 @@ endef
 # endef
 
 define Build/Compile
-	$(MAKE) -C $(PKG_BUILD_DIR)/src/ \
+	$(MAKE) -C $(PKG_BUILD_DIR)/qdloader/ \
 		$(TARGET_CONFIGURE_OPTS) \
 		TARGET=Linux \
 		CFLAGS="$(TARGET_CFLAGS)" \
@@ -46,8 +46,8 @@ define Build/Compile
 endef
 
 define Package/qloader/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/qloader $(1)/usr/sbin/
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/qdloader/qdloader $(1)/usr/sbin/
 endef
 
 $(eval $(call BuildPackage,qloader))
